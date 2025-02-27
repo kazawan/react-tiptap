@@ -1,0 +1,347 @@
+/* Link Input Form */
+.link-input-form {
+  position: fixed;
+  background: white;
+  padding: 8px;
+  border: 1px solid #b6b6b8;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+  
+}
+
+.link-input-form input {
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  flex: 1;
+  
+}
+
+.link-test-form{
+  position: fixed;
+  background: white;
+  padding: 8px;
+  border: 1px solid #b6b6b8;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+
+html,
+body {
+  margin: 0 auto;
+  padding: 0;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #d3d2d2;
+  color:#383838;
+} 
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.Editor {
+  min-width: 800px;
+  max-width: 800px;
+  height: 99vh;
+  outline: 0;
+  padding: 2rem;
+}
+
+.Editor h1,
+.Editor h2,
+.Editor h3,
+.Editor h4,
+.Editor h5,
+.Editor h6,
+.Editor p,
+.Editor ul,
+.Editor ol,
+.Editor li,
+.Editor blockquote,
+.Editor pre,
+.Editor figure,
+.Editor image {
+  margin: 0;
+}
+
+.Editor h1:not(:last-child),
+.Editor h2:not(:last-child),
+.Editor h3:not(:last-child),
+.Editor h4:not(:last-child),
+.Editor h5:not(:last-child),
+.Editor h6:not(:last-child),
+.Editor p:not(:last-child),
+.Editor ul:not(:last-child),
+.Editor ol:not(:last-child),
+.Editor li:not(:last-child),
+.Editor blockquote:not(:last-child),
+.Editor pre:not(:last-child),
+.Editor figure:not(:last-child),
+.Editor image:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.tiptap p.is-empty::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap h1.is-empty::before,
+.tiptap h2.is-empty::before,
+.tiptap h3.is-empty::before
+{
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap ul.is-empty::before,
+.tiptap ol.is-empty::before 
+{
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-weight: 500;
+}
+
+
+
+.Editor h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.Editor h1:not(:last-child) {
+  margin-bottom: 0.75em;
+  
+}
+
+.Editor h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.Editor h3 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.Editor p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #111111;
+}
+
+.Editor blockquote {
+  padding: 1rem;
+  padding-left: 2rem;
+  background: #a9aaaa;
+  border-radius: 0.5rem;
+  border: 0.1rem solid #b6b6b8;
+  color: #000;
+}
+
+.Editor blockquote p {
+  margin-bottom: 0;
+}
+
+.Editor pre {
+  padding: 1rem;
+  background: #6e6e6e;
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.Editor ul {
+  padding-left: 1.2rem;
+}
+
+.Editor ul > li {
+  list-style-type: disc;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1rem;
+  margin-left: 0.2rem;
+}
+
+.Editor ol {
+  padding-left: 1.2rem;
+}
+
+.Editor ol > li {
+  list-style-type: decimal;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1rem;
+
+}
+
+.Editor ul[data-type="taskList"] {
+  padding-left: 0rem;
+}
+
+.Editor ul[data-type="taskList"] li {
+  padding-left: 0rem;
+  list-style-type: none;
+  display: flex;
+}
+
+.Editor ul[data-type="taskList"] p {
+  margin-bottom: 0;
+  margin-left: 0.5rem;
+}
+
+.Editor ul[data-type="taskList"] input {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+.Editor div[data-youtube-video] {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.Editor p code {
+  padding: 0.2rem 0.4rem;
+  background: #bebdbd;
+  color: #504f4f;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 800;
+}
+
+/* Slash Command Menu Styles */
+div[cmdk-root] {
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  z-index: 100;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+div[cmdk-list] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+
+}
+
+div[cmdk-empty] {
+  padding: 8px 12px;
+  color: #999;
+
+}
+
+div[cmdk-item] {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 4px;
+  
+
+}
+
+div[cmdk-item][data-selected="true"] {
+  background-color: #eee;
+}
+
+div[cmdk-item]:hover {
+  background-color: #f5f5f5;
+}
+
+div[cmdk-item] p {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 700;
+
+
+}
+
+
+.Editor hr {
+  border: 0;
+  border-top: 0.1rem solid #e1e1e1;
+  margin: 1rem 0;
+}
+
+.italic {
+  font-family: Helvetica;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.tiptap-Link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.tiptap-Link:hover {
+  color: #0056b3;
+}
+
+.Editor img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+}
+
+.tiptap pre {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  background: #bebdbd;
+  color: #504f4f;
+}
+
+
+
+
+
