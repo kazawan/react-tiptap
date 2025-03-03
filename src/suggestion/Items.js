@@ -1,6 +1,6 @@
 import { createSuggestionsItems } from "@harshtalks/slash-tiptap";
 
-const createSuggestions = (setIsLinkInputOpen,setIsTestOpen,) => createSuggestionsItems([
+const createSuggestions = (setIsLinkInputOpen,isUploadImageOpen,) => createSuggestionsItems([
     {
         title: "# Heading 1",
         searchTerms: ["Heading"],
@@ -139,15 +139,15 @@ const createSuggestions = (setIsLinkInputOpen,setIsTestOpen,) => createSuggestio
         }
     },
     {
-        title:"test",
-        searchTerms: ["test"],
+        title:"Upload Image",
+        searchTerms: ["Upload Image"],
         command: ({ editor, range }) => {
             editor
                 .chain()
                 .focus()
                 .deleteRange(range)
                 .run();
-            setIsTestOpen(true);
+                isUploadImageOpen(true);
         },
     }
 

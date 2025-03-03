@@ -30,11 +30,13 @@
     "@tiptap/react": "latest",
     "@tiptap/starter-kit": "latest",
     "@tiptap/suggestion": "^2.11.5",
+    "lucide-react": "^0.477.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.85.1",
     "tippy": "^0.0.0",
     "tiptap-extension-image-upload": "^0.1.6",
+    "tiptap-extension-resize-image": "^1.2.1",
     "tiptap-extension-upload-image": "^1.0.1"
   },
   "devDependencies": {

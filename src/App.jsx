@@ -14,22 +14,18 @@ import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import CodeBlock from '@tiptap/extension-code-block';
 
-import { Slash, SlashCmdProvider, enableKeyboardNavigation ,SlashCmd} from '@harshtalks/slash-tiptap';
+import { Slash, SlashCmdProvider, enableKeyboardNavigation, SlashCmd } from '@harshtalks/slash-tiptap';
 import createSuggestions from './suggestion/items'
 import { useCallback, useState } from "react";
+import ImageResize from 'tiptap-extension-resize-image';
 
 // link 输入框
 
 import LinkInput from './linkinput/LinkInput';
 
 // image upload
-import Test from './Test/Test';
+import UploadImage from './uploadImage/uploadImage';
 
-function uploadImage(file) {
-  return new Promise((resolve, reject) => {
-    resolve("https://avatars.githubusercontent.com/u/13764272?v=4");
-  })
-};
 
 
 
@@ -38,30 +34,38 @@ function uploadImage(file) {
 
 export default function App() {
   const [isLinkInputOpen, setIsLinkInputOpen] = useState(false);
-  const [isTestOpen, setIsTestOpen] = useState(false);
-  const suggestions = createSuggestions(setIsLinkInputOpen,setIsTestOpen);
-  
+  const [isUploadImageOpen, setIsUploadImageOpen] = useState(true);
+  const suggestions = createSuggestions(setIsLinkInputOpen, setIsUploadImageOpen);
+
   const editor = useEditor({
     extensions: [StarterKit,
       Placeholder.configure({
         placeholder: ({ node }) => {
-          if(node.type.name === 'heading') {
-            console.log(node);
-            return 'Heading';
+          if (node.type.name === 'heading') {
+            switch (node.attrs.level) {
+              case 1:
+                return 'Heading 1';
+              case 2:
+                return 'Heading 2';
+              case 3:
+                return 'Heading 3';
+              default:
+                return 'Heading';
+            }
           }
-          if(node.type.name === 'bulletList') {
+          if (node.type.name === 'bulletList') {
             return 'Bullet List';
           }
-          if(node.type.name === 'orderedList') {
+          if (node.type.name === 'orderedList') {
             return 'Ordered List';
           }
-          if(node.type.name === 'taskList') {
+          if (node.type.name === 'taskList') {
             return 'Task List';
           }
           return 'Type / for commands';
         },
         showOnlyWhenEditable: true,
-        
+
       }),
       Heading.configure({
         levels: [1, 2, 3],
@@ -78,7 +82,7 @@ export default function App() {
       Italic.configure({
         HTMLAttributes: {
           class: "italic",
-        },  
+        },
       }),
       HorizontalRule,
       Slash.configure({
@@ -97,18 +101,15 @@ export default function App() {
           return true;
         },
       }),
-      Image.configure({
-        HTMLAttributes: {
-          class: "tiptap-Image",
-        },
-        allowBase64: true,
+      ImageResize.configure({
+        
       }),
       CodeBlock.configure({
         HTMLAttributes: {
           class: "tiptap-CodeBlock",
         },
       }),
-      
+
 
 
     ],
@@ -121,12 +122,12 @@ export default function App() {
       },
     },
     content: `
-      <h1>Beautiful view</h1>
+      
     
       
 
     `,
-    editable: true ,
+    editable: true,
   });
 
   return (
@@ -138,10 +139,10 @@ export default function App() {
           isOpen={isLinkInputOpen}
           setIsOpen={setIsLinkInputOpen}
         />
-        <Test
+        <UploadImage
           editor={editor}
-          isOpen={isTestOpen}
-          setIsOpen={setIsTestOpen}
+          isOpen={isUploadImageOpen}
+          setIsOpen={setIsUploadImageOpen}
         />
         <SlashCmd.Root editor={editor}>
           <SlashCmd.Cmd>
