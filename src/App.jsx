@@ -13,11 +13,14 @@ import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import CodeBlock from '@tiptap/extension-code-block';
+import ImageResize from 'tiptap-extension-resize-image';
+
 
 import { Slash, SlashCmdProvider, enableKeyboardNavigation, SlashCmd } from '@harshtalks/slash-tiptap';
+
+
 import createSuggestions from './suggestion/items'
-import { useCallback, useState } from "react";
-import ImageResize from 'tiptap-extension-resize-image';
+import { useCallback, useEffect, useState } from "react";
 
 // link 输入框
 
@@ -29,13 +32,64 @@ import UploadImage from './uploadImage/uploadImage';
 
 
 
-
+const mockContent = {
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: {
+        level: 1,
+      },
+      content: [
+        {
+          type: 'text',
+          text: 'Welcome to the kazawan editor',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'yeahyeahyeah',
+        },
+      ],
+    },
+  ],
+};
 
 
 export default function App() {
   const [isLinkInputOpen, setIsLinkInputOpen] = useState(false);
-  const [isUploadImageOpen, setIsUploadImageOpen] = useState(true);
+  const [isUploadImageOpen, setIsUploadImageOpen] = useState(false);
   const suggestions = createSuggestions(setIsLinkInputOpen, setIsUploadImageOpen);
+  const [contentJson, setContentJson] = useState({
+    type: 'doc',
+    content: [
+      {
+        type: 'heading',
+        attrs: {
+          level: 1,
+        },
+        content: [
+          {
+            type: 'text',
+            text: 'Welcome to the editor',
+          },
+        ],
+      },
+      {
+        type: 'paragraph',
+        content: [
+          {
+            type: 'text',
+            text: 'This is a basic example of the editor',
+          },
+        ],
+      },
+    ],
+  })
 
   const editor = useEditor({
     extensions: [StarterKit,
@@ -121,17 +175,40 @@ export default function App() {
         keydown: (_, v) => enableKeyboardNavigation(v),
       },
     },
-    content: `
-      
-    
-      
-
-    `,
+    content: `...`,
     editable: true,
+    onUpdate: ({ editor }) => {
+      setContentJson({...editor.getJSON()});
+    }
   });
 
+  function updateContent() {
+      const content = mockContent;
+      editor.commands.setContent(content);
+      setContentJson({...content});  
+  }
+
+  function saveContent() {
+    console.log(contentJson);
+  } 
+
+  useEffect(() => { 
+    if(editor) {
+      editor.commands.setContent(contentJson);
+    }
+  }, [editor, contentJson]);
+
+
+
   return (
+    
     <div className="App">
+    <div>
+      <button onClick={()=>updateContent()} >update</button>
+    </div>
+    <div>
+      <button onClick={()=>saveContent()}>save</button>
+    </div>
       <SlashCmdProvider>
         <EditorContent editor={editor} />
         <LinkInput

@@ -15,7 +15,22 @@ db.serialize(() => {
     image_alt TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
-)`);
-}
-)
+)`
+
+
+    );
+});
+
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS blog (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    blog_title TEXT NOT NULL,
+    blog_content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
+
+)`
+    );
+});
+
 module.exports = db;
